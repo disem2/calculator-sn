@@ -1,0 +1,45 @@
+<div class="calculator-container">
+  <h2>Calculator</h2>
+
+  <!-- Input Field for Expression -->
+  <div class="input-container">
+    <input
+      type="text"
+      [(ngModel)]="expression"
+      (input)="onExpressionChange(expression)"
+      (keyup.enter)="addToHistory()"
+      placeholder="Enter expression"
+    />
+    <button (click)="addToHistory()" aria-label="Submit">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="22" y1="12" x2="11" y2="12"></line>
+        <polyline points="15 6 22 12 15 18"></polyline>
+        <line x1="2" y1="12" x2="11" y2="12"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Display Result or Error Message -->
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  <div *ngIf="!errorMessage && displayResult" class="result">Result: {{ displayResult }}</div>
+
+  <!-- Display History -->
+  <div class="history">
+    <h3>History (Last 5 Calculations)</h3>
+    <ul>
+      <li *ngFor="let item of history">
+        <span>{{ item.expression }} = {{ item.result }}</span>
+      </li>
+    </ul>
+  </div>
+</div>
